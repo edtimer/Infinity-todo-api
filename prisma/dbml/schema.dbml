@@ -1,0 +1,32 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table User {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  email String [unique, not null]
+  password String [not null]
+  firstname String
+  lastname String
+  todo Todo [not null]
+}
+
+Table Todo {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  name String [not null]
+  description String [not null]
+  author User [not null]
+  authorId String [not null]
+  status EnumStatus [not null]
+}
+
+Enum EnumStatus {
+  DONE
+  PENDING
+}
+
+Ref: Todo.authorId > User.id
