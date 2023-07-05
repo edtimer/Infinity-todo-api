@@ -22,7 +22,7 @@ export class AuthResolver {
   constructor(private readonly auth: AuthService) { }
 
 
-  @UseGuards(GqlAuthGuard)
+
   @Mutation(() => Auth)
   async registerUser(@Args('data') data: CreateUserDto) {
     data.email = data.email.toLowerCase();

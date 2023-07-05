@@ -29,11 +29,6 @@ input CreateStaffInput {
   password: String!
 }
 
-input CreateTodoInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
 input CreateUserDto {
   email: String!
   firstname: String!
@@ -64,7 +59,7 @@ input LoginInput {
 type Mutation {
   changePassword(data: ChangePasswordInput!): User!
   createEmailCommunication(data: CreateEmailInput!): String!
-  createTodo(createTodoInput: CreateTodoInput!): Todo!
+  createTodo(createTodoInput: TodoCreateInput!): Todo!
   createUser(data: CreateStaffInput!): User!
   deleteUser(data: UserWhereUniqueInput!): User!
   login(data: LoginInput!): Auth!
@@ -78,12 +73,12 @@ type Mutation {
 }
 
 type Query {
-  findTodoByUser(id: Int!, userId: String!): Todo!
+  findTodoByUser(userId: String!): [Todo!]!
+  getAllTodos: [Todo!]!
+  getSingleTodo(id: Int!): Todo!
   hello(name: String!): String!
   helloWorld: String!
   me: User!
-  todo(id: Int!): Todo!
-  todos: [Todo!]!
 }
 
 type Todo {
@@ -91,10 +86,22 @@ type Todo {
   authorId: String!
   createdAt: DateTime!
   description: String!
+  dueDate: DateTime!
   id: ID!
   name: String!
   status: EnumStatus!
   updatedAt: DateTime!
+}
+
+input TodoCreateInput {
+  author: UserCreateNestedOneWithoutTodoInput!
+  createdAt: DateTime
+  description: String!
+  dueDate: DateTime
+  id: String
+  name: String!
+  status: EnumStatus!
+  updatedAt: DateTime
 }
 
 type Token {
@@ -106,9 +113,18 @@ type Token {
 }
 
 input UpdateTodoInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  """todo auhtor Id"""
+  authorId: String
+
+  """todo description"""
+  description: String
+
+  """todo due date"""
+  dueDate: DateTime
   id: Int!
+
+  """todo name"""
+  name: String
 }
 
 input UpdateUserInput {
@@ -133,6 +149,27 @@ type User {
 
 type UserCount {
   todo: Int!
+}
+
+input UserCreateNestedOneWithoutTodoInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutTodoInput
+  create: UserCreateWithoutTodoInput
+}
+
+input UserCreateOrConnectWithoutTodoInput {
+  create: UserCreateWithoutTodoInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateWithoutTodoInput {
+  createdAt: DateTime
+  email: String!
+  firstname: String
+  id: String
+  lastname: String
+  password: String!
+  updatedAt: DateTime
 }
 
 input UserWhereUniqueInput {

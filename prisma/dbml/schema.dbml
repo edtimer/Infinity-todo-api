@@ -17,6 +17,7 @@ Table Todo {
   id String [pk]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
+  dueDate DateTime [not null]
   name String [not null]
   description String [not null]
   author User [not null]

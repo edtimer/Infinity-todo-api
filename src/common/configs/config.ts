@@ -10,7 +10,7 @@ const config: Config = {
   },
   swagger: {
     enabled: true,
-    title: 'KLG IAMS',
+    title: 'Infinity API',
     description: 'The nestjs API description',
     version: '1.5',
     path: 'api',

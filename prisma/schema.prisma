@@ -34,6 +34,7 @@ model Todo {
   id          String     @id @default(cuid())
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
+  dueDate     DateTime   @updatedAt
   name        String
   description String
   author      User       @relation(fields: [authorId], references: [id])

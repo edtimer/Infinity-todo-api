@@ -1,0 +1,52 @@
+mutation createTodo($createTodoInput:TodoCreateInput!){
+  createTodo(createTodoInput:$createTodoInput){
+    id
+  }
+}
+
+
+{
+  "createTodoInput": {
+    "author": {"connect": {"id": "1234"}},
+    "name": "get water",
+    "description": "get a large bottle",
+    "status": "PENDING"
+    }
+  }
+
+
+
+mutation registerUser($data: CreateUserDto!) {
+  registerUser(data: $data) {
+    accessToken
+    refreshToken
+  }
+}
+
+
+  "data": {
+"email": "test@test.com",
+    "password": "12345678","firstname": "testoo","lastname": "testerrr"
+    }
+  }
+
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbGpwdW42dWcwMDAyYTRsb215bHJxYWxwIiwiaWF0IjoxNjg4NTY5NDM1LCJleHAiOjE2ODg2NTU4MzV9.SPNHL5QenE4vSogFqWAI3QVylvi5WBjDZYDjd7QCyvw"
+
+
+
+mutation secureLogin($data: LoginInput!) {
+  secureLogin(data: $data) {
+    accessToken
+    refreshToken
+  }
+}
+
+
+{
+  "data": {
+"email": "test@test.com",
+    "password": "12345678"
+    }
+  }
+
+
