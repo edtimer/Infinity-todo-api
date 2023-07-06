@@ -1,8 +1,10 @@
+import { IsNotEmpty } from 'class-validator';
 import { CreateTodoInput } from './create-todo.input';
 import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
 
 @InputType()
 export class UpdateTodoInput extends PartialType(CreateTodoInput) {
-  @Field(() => Int)
-  id: number;
+  @IsNotEmpty()
+  @Field(() => String)
+  id: string;
 }

@@ -67,13 +67,12 @@ type Mutation {
   registerUser(data: CreateUserDto!): Auth!
   removeTodo(id: Int!): Todo!
   secureLogin(data: LoginInput!): Auth!
-  updatStaff(data: UpdateUserInput!, staffId: UserWhereUniqueInput!): User!
   updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
   updateUser(data: UpdateUserInput!): User!
 }
 
 type Query {
-  findTodoByUser(userId: String!): [Todo!]!
+  findTodoByUser: [Todo!]!
   getAllTodos: [Todo!]!
   getSingleTodo(id: Int!): Todo!
   hello(name: String!): String!
@@ -121,7 +120,7 @@ input UpdateTodoInput {
 
   """todo due date"""
   dueDate: DateTime
-  id: Int!
+  id: String!
 
   """todo name"""
   name: String

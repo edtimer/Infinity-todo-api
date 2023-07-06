@@ -14,12 +14,12 @@ import { GqlAuthGuard } from 'src/auth/gql-auth.guard';
 
 @Resolver(() => Todo)
 export class TodosResolver {
-  constructor(private readonly todosService: TodosService) {}
-  
+  constructor(private readonly todosService: TodosService) { }
+
   @UseGuards(GqlAuthGuard)
   @Mutation(() => Todo)
-  createTodo(@UserEntity() user: User,@Args('createTodoInput') createTodoInput: TodoCreateInput) {
-    return this.todosService.create(user,createTodoInput);
+  createTodo(@UserEntity() user: User, @Args('createTodoInput') createTodoInput: TodoCreateInput) {
+    return this.todosService.create(user, createTodoInput);
   }
 
   @Query(() => [Todo], { name: 'getAllTodos' })
@@ -31,14 +31,15 @@ export class TodosResolver {
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.todosService.findOne(id);
   }
+  @UseGuards(GqlAuthGuard)
   @Query(() => [Todo], { name: 'findTodoByUser' })
-  findTodoByUser(@Args('userId') userId:string) {
-    return this.todosService.findTodoByUser(userId);
+  findTodoByUser(@UserEntity() user: User,) {
+    return this.todosService.findTodoByUser(user);
   }
 
   @Mutation(() => Todo)
   updateTodo(@Args('updateTodoInput') updateTodoInput: UpdateTodoInput) {
-    return this.todosService.update(updateTodoInput.id, updateTodoInput);
+    return this.todosService.update(updateTodoInput);
   }
 
   @Mutation(() => Todo)

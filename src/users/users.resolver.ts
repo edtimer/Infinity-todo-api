@@ -52,15 +52,6 @@ export class UsersResolver {
     return this.usersService.createStaff(newStaffData, user.id);
   }
 
-  @UseGuards(GqlAuthGuard)
-  @Mutation(() => User)
-  async updatStaff(
-    @UserEntity() user: User,
-    @Args('data') newStaffData: UpdateUserInput,
-    @Args('staffId') staffId: UserWhereUniqueInput
-  ) {
-    return this.usersService.updateStaff(user.id, newStaffData,staffId);
-  }
 
   @UseGuards(GqlAuthGuard)
   @Mutation(() => User)
