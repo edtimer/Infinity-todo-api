@@ -13,7 +13,6 @@ import {
   User as UserPrisma,
 
 } from '@prisma/client';
-import { Post } from 'src/@generated/graphql/post/post.model';
 import { Todo } from 'src/@generated/graphql/todo/todo.model';
 @ObjectType()
 export class User extends BaseModel implements UserPrisma {
@@ -28,7 +27,7 @@ export class User extends BaseModel implements UserPrisma {
   lastname: string;
 
   @Field(() => [Todo], { nullable: true })
-  todo?: Post[];
+  todo?: Todo[];
 
 
   @HideField()
